@@ -1,0 +1,101 @@
+.menu-btn{
+    position: absolute;
+    top: 20px;  
+    right: 20px;
+    width: 28px;
+    z-index: 3;
+    cursor: pointer;
+    @include easeOut;
+    .btn-line {
+        background: set-text-color($primary-color);
+        height: 3px;
+        margin: 0 0 5px 0;
+        @include easeOut;
+    }
+    &.close {
+        transform: rotate(180deg);
+        .btn-line{
+            // 1st child
+            &:nth-child(1){
+                transform: rotate(45deg) translate(5px, 5px);
+            } 
+            &:nth-child(2){
+                opacity: 0;
+            }
+            &:nth-child(3){
+                transform: rotate(-45deg) translate(7px, -6px);   
+            }
+        }
+    }
+}
+
+.menu {
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0.9;
+    &.show {
+        visibility: visible;
+    }
+    &-branding, 
+    &-nav {
+        display: flex;
+        flex-flow: column wrap;
+        width: 50%;
+        float: left;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+         
+    }
+    &-branding {
+        background: $primary-color;
+        opacity: 0.5;
+        transform: translate3d(0,100%,0);
+        @include easeOut;
+        &.show {
+            transform: translate3d(0,0,0);
+        }
+        .portrait {
+            background: url(../images/girish.jpg);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid $secondary-color;
+            background-size: 250px;
+        }
+
+        
+    }
+    &-nav {
+        margin: 0;
+        padding: 0;
+        background: darken($primary-color,5);
+        list-style: none;
+        font-size: 2rem;
+        transform: translate3d(0,-100%,0);
+        @include easeOut;
+        &.show {
+            transform: translate3d(0,0,0);
+        }
+        .nav-item {
+            transform: translate3d(600px,0,0);
+            @include easeOut;
+            &.show {
+                transform: translate3d(0,0,0);
+            }
+        }
+    }
+    
+}
+
+// delay each nav item by 0.5s
+@for $x from 1 through 4 {
+    .nav-item:nth-child(#{$x}){
+        transition-delay: $x * 0.1s;
+    }
+}
+
